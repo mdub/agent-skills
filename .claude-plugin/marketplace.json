@@ -17,7 +17,7 @@
       "keywords": ["diagrams", "d2", "visualization", "architecture"],
       "category": "productivity",
       "skills": [
-        "d2-diagrams"
+        "./d2-diagrams"
       ]
     }
   ]
