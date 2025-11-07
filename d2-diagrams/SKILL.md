@@ -38,14 +38,15 @@ To understand requirements:
 ### 2. Create D2 Source File
 To create the D2 source:
 - Write a `.d2` file with clear, descriptive D2 syntax
-- Use appropriate shapes for different entity types (see references/d2-syntax-full.md)
+- Use appropriate shapes for different entity types (see `references/quick-reference.md`)
 - Add meaningful labels and connections
 - Apply styling and layout options as needed
+- Refer to `examples/` for common patterns
 
 ### 3. Generate Diagram
 To generate the diagram:
 - Run `d2 <filename>.d2 <output>.svg` to generate SVG output
-- Alternative formats: PNG, PDF (use `--output=<file>.png` or similar)
+- Alternative formats: PNG, PDF (use different file extensions)
 - Use layout engine flags if needed: `--layout=elk` or `--layout=tala`
 - Apply themes with `--theme=<theme-id>` if desired
 
@@ -55,7 +56,7 @@ To complete the task:
 - Be ready to modify the D2 source based on feedback
 - Regenerate after making changes
 
-## D2 Syntax Quick Reference
+## Quick Syntax
 
 ### Basic Elements
 ```d2
@@ -78,10 +79,7 @@ user.shape: person
 - `cloud` - cloud services
 - `diamond` - decision points
 
-For complete syntax reference, see `references/d2-syntax-full.md`.
-
-## Layout Engines
-
+### Layout Engines
 - **dagre** (default): Fast, hierarchical layouts
 - **elk**: Mature engine, good for complex diagrams
 - **tala**: Best for software architecture
@@ -108,16 +106,25 @@ user -> db: profiles
 
 Generate with: `d2 diagram.d2 output.svg`
 
-## Advanced Features
+## Resources
 
-For power users, D2 supports advanced features:
-- **Variables**: Define reusable values with `vars` keyword
-- **Globs**: Apply styles to multiple objects with wildcard patterns
-- **Classes**: Create reusable style sets
-- **Overrides**: Modify previously defined elements
-- **Legend**: Add explanatory legends to diagrams
+### Bundled References
+- `references/quick-reference.md` - Essential syntax and patterns with links to official docs
+- `examples/microservices-architecture.d2` - Complete microservices example
+- `examples/network-topology.d2` - Network architecture example
 
-See `references/advanced-features.md` for complete documentation on these features.
+### Official D2 Documentation
+- **Complete tour**: https://d2lang.com/tour/intro
+- **Interactive playground**: https://play.d2lang.com
+- **Cheat sheet**: https://d2lang.com/tour/cheat-sheet
+- **Shapes reference**: https://d2lang.com/tour/shapes
+- **Styling guide**: https://d2lang.com/tour/style
+- **Advanced features**:
+  - [Variables](https://d2lang.com/tour/vars)
+  - [Classes](https://d2lang.com/tour/classes)
+  - [Imports](https://d2lang.com/tour/imports)
+  - [Composition](https://d2lang.com/tour/composition)
+  - [Themes](https://d2lang.com/tour/themes)
 
 ## Troubleshooting
 
@@ -125,20 +132,4 @@ See `references/advanced-features.md` for complete documentation on these featur
 - **Layout issues**: Try different layout engines (`--layout=elk` or `--layout=tala`)
 - **Overlapping elements**: Use containers to group related elements
 - **Syntax errors**: Check proper quoting of labels with spaces
-- **Need detailed syntax**: Reference `references/d2-syntax-full.md` for complete documentation
-
-## Example Diagrams
-
-Complete example diagrams are available in `examples/`:
-- `examples/microservices-architecture.d2` - Microservices setup with API gateway, services, and data layer
-- `examples/network-topology.d2` - DMZ network architecture with firewall, public and internal zones
-
-These examples can be used as starting templates or reference for common patterns.
-
-## Additional Resources
-
-- D2 Documentation: https://d2lang.com/tour/intro
-- D2 Playground: https://play.d2lang.com (test syntax interactively)
-- Complete syntax reference: `references/d2-syntax-full.md`
-- Advanced features guide: `references/advanced-features.md`
-- Example templates: `examples/`
+- **Need more details**: See `references/quick-reference.md` or https://d2lang.com/tour
