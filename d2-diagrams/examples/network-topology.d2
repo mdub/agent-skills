@@ -1,0 +1,117 @@
+# Network Topology Example
+# A typical DMZ network setup with internet, firewall, and internal zones
+
+title: Network Topology - DMZ Architecture
+
+# External
+internet: Internet {
+  shape: cloud
+  style.fill: "#3498DB"
+}
+
+# Security layer
+firewall: Firewall {
+  shape: hexagon
+  style.fill: "#E74C3C"
+}
+
+# DMZ (Public-facing services)
+dmz: DMZ {
+  style.fill: "#FEF5E7"
+
+  lb: Load Balancer {
+    shape: hexagon
+    style.fill: "#9B59B6"
+  }
+
+  web1: Web Server 1 {
+    style.fill: "#3498DB"
+  }
+
+  web2: Web Server 2 {
+    style.fill: "#3498DB"
+  }
+
+  proxy: Reverse Proxy {
+    style.fill: "#16A085"
+  }
+
+  # DMZ internal connections
+  lb -> web1: distribute
+  lb -> web2: distribute
+  web1 -> proxy: forward
+  web2 -> proxy: forward
+}
+
+# Internal network (Protected zone)
+internal: Internal Network {
+  style.fill: "#E8F8F5"
+
+  app_tier: Application Tier {
+    app1: App Server 1 {
+      style.fill: "#27AE60"
+    }
+    app2: App Server 2 {
+      style.fill: "#27AE60"
+    }
+  }
+
+  data_tier: Data Tier {
+    primary_db: Primary DB {
+      shape: cylinder
+      style.fill: "#E74C3C"
+    }
+    replica_db: Replica DB {
+      shape: cylinder
+      style.fill: "#F39C12"
+    }
+    cache: Cache {
+      shape: cylinder
+      style.fill: "#E67E22"
+    }
+  }
+
+  # Internal connections
+  app_tier.app1 -> data_tier.primary_db: read/write
+  app_tier.app2 -> data_tier.primary_db: read/write
+  app_tier.app1 -> data_tier.cache: cache ops
+  app_tier.app2 -> data_tier.cache: cache ops
+  data_tier.primary_db -> data_tier.replica_db: replicate
+}
+
+# Management network
+mgmt: Management {
+  style.fill: "#FDF2E9"
+
+  bastion: Bastion Host {
+    shape: rectangle
+    style.fill: "#D35400"
+  }
+
+  monitoring: Monitoring {
+    style.fill: "#8E44AD"
+  }
+
+  backup: Backup Server {
+    style.fill: "#34495E"
+  }
+}
+
+# External to DMZ
+internet -> firewall: incoming traffic
+firewall -> dmz.lb: filtered traffic
+
+# DMZ to Internal
+dmz.proxy -> internal.app_tier.app1: backend requests
+dmz.proxy -> internal.app_tier.app2: backend requests
+
+# Management connections
+mgmt.bastion -> internal.app_tier.app1: SSH access
+mgmt.bastion -> internal.app_tier.app2: SSH access
+mgmt.monitoring -> internal.app_tier.app1: metrics
+mgmt.monitoring -> internal.app_tier.app2: metrics
+mgmt.monitoring -> internal.data_tier.primary_db: health checks
+mgmt.backup -> internal.data_tier.primary_db: backups
+
+# Layout
+direction: down

@@ -1,0 +1,84 @@
+# Microservices Architecture Example
+# A typical microservices setup with API gateway, services, and data layer
+
+title: Microservices Architecture
+
+# Entry point
+users: Users {
+  shape: person
+  style.fill: "#D4E6F1"
+}
+
+# API Gateway
+api_gateway: API Gateway {
+  shape: hexagon
+  style.fill: "#9B59B6"
+}
+
+# Microservices
+services: Services {
+  auth: Auth Service {
+    style.fill: "#3498DB"
+  }
+
+  user: User Service {
+    style.fill: "#3498DB"
+  }
+
+  order: Order Service {
+    style.fill: "#3498DB"
+  }
+
+  payment: Payment Service {
+    style.fill: "#3498DB"
+  }
+}
+
+# Data layer
+data: Data Layer {
+  user_db: User Database {
+    shape: cylinder
+    style.fill: "#E74C3C"
+  }
+
+  order_db: Order Database {
+    shape: cylinder
+    style.fill: "#E74C3C"
+  }
+
+  cache: Redis Cache {
+    shape: cylinder
+    style.fill: "#E67E22"
+  }
+}
+
+# External service
+payment_provider: Payment Provider {
+  shape: cloud
+  style.fill: "#95A5A6"
+}
+
+# Connections from users to gateway
+users -> api_gateway: HTTPS requests
+
+# Connections from gateway to services
+api_gateway -> services.auth: authenticate
+api_gateway -> services.user: user operations
+api_gateway -> services.order: order operations
+api_gateway -> services.payment: payment operations
+
+# Service to database connections
+services.auth -> data.user_db: verify credentials
+services.user -> data.user_db: user data
+services.order -> data.order_db: order data
+services.payment -> data.order_db: payment records
+
+# Cache connections
+services.user -> data.cache: session cache
+services.order -> data.cache: order cache
+
+# External service connection
+services.payment -> payment_provider: process payments
+
+# Layout
+direction: right
