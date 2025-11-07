@@ -1,0 +1,23 @@
+# Claude Code local settings
+.claude/settings.local.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*~
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test outputs
+test-*.d2
+test-*.svg
+test-*.png
+test-*.pdf

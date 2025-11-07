@@ -1,0 +1,24 @@
+{
+  "name": "mdub-agent-skills",
+  "owner": {
+    "name": "Mike Williams",
+    "url": "https://github.com/mdub"
+  },
+  "metadata": {
+    "description": "A marketplace for Claude Code agent skills and plugins",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "diagramming",
+      "source": "./",
+      "description": "Skills for generating diagrams including D2 diagram generation",
+      "version": "0.1.0",
+      "keywords": ["diagrams", "d2", "visualization", "architecture"],
+      "category": "productivity",
+      "skills": [
+        "d2-diagrams"
+      ]
+    }
+  ]
+}
